@@ -1,0 +1,44 @@
+### SignUp a new user
+
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "test2@gmail.com",
+    "password": "23323dsds",
+    "name": "test2"
+}
+
+### Sigin In User
+
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email": "test2@gmail.com",
+    "password": "23323dsds"
+}
+
+### Delete User
+
+DELETE http://localhost:3000/auth/4
+
+### SignOut
+POST http://localhost:3000/auth/signout
+
+
+### Create new Note
+
+POST http://localhost:3000/notes
+Content-Type: application/json
+
+{
+    "title": "First Note",
+    "description": "This is test note",
+    "completed": "false"
+}
+
+
+### Get user notes
+
+GET http://localhost:3000/notes/7
