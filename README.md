@@ -8,6 +8,12 @@ Tools: ["NestJs", "Webpack', "Typescript", "Graphql"]
 
 This is a simple practice repository to try out NestJs and see how to implement basic Rest and Graphql endpoints with it.
 
+##### Walk through of NestJs core packages
+
+- `@nestjs/common` - Contains functions, classes that we need from Nest to perform actions like pipe, services, controller.
+- `@nestjs/platform-express` - Its a binding for Express, so that we can use Express with NestJs
+- `reflect-metadata` - Helps with decorators.
+
 ## Scope
 
 - Rest Endpoints
@@ -64,3 +70,11 @@ This is a simple practice repository to try out NestJs and see how to implement 
 - Then we included the Core module in the main App Module.
 - We have used Middleware a lot to intercept the request and add auth gaurds.
 - To generate the typing for graphql run - `ts-node generate-typings`
+
+### Side Note
+
+- To use the `env variables` we use the `@nestjs/config` which has the dotenv package and helps in reading the env variables from .env file or the variables defined.
+- Create two .env files `.env.test` and `.env.development`
+
+- Order of execution in NestJs
+  `Req ==> middleware ===> gaurds ===> interceptor[request handler](before/after request handler) => response`

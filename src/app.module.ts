@@ -1,9 +1,7 @@
 import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ValidationPipe } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
@@ -11,12 +9,18 @@ import { APP_PIPE } from '@nestjs/core';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cookieSession = require('cookie-session');
 
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { NotesModule } from './notes/notes.module';
 import { CoreModule } from './core.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
     TypeOrmModule.forRoot(), // registers TypeORM  and it reads the ormconfig file
     CoreModule,
     UsersModule,
@@ -44,12 +48,13 @@ import { CoreModule } from './core.module';
   ],
 })
 export class AppModule {
+  constructor(private configService: ConfigService) {}
   // configure global middleware
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
         cookieSession({
-          keys: ['dsdwwewew'], // secret
+          keys: [this.configService.get<string>('COOKIE_KEY')], // secret
         }),
       )
       .forRoutes('*'); // use it on all routes
