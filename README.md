@@ -1,7 +1,7 @@
 ---
-title: Basic server with NestJs.
-excerpt: A simple node typescript server with NestJs with Graphql and Rest APIs.
-Tools: ["NestJs", "Webpack', "Typescript", "Graphql"]
+Title: Basic server with NestJs.
+Excerpt: A simple node typescript server with NestJs with Graphql and Rest APIs.
+Tech: "NestJs, Webpack, Typescript, Graphql"
 ---
 
 # NestJs with Grpahql and Rest API
